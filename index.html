@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Forever ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fffdf8, #f8f0e8, #fffaf5);
+    color: #58483e;
+    overflow-x: hidden;
+}
+
+.page {
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+    position: relative;
+}
+
+.page.active {
+    display: flex;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    width: 100%;
+    max-width: 550px;
+    padding: 48px 30px;
+    background: rgba(255,255,255,0.75);
+    border: 1px solid #eee0d0;
+    border-radius: 25px;
+    box-shadow: 0 15px 55px rgba(126, 95, 72, 0.12);
+    position: relative;
+    z-index: 2;
+}
+
+.small-title {
+    color: #b18a65;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 7vw, 53px);
+    font-weight: 500;
+    color: #765b49;
+    line-height: 1.3;
+}
+
+h1 span {
+    color: #c49b77;
+    font-style: italic;
+}
+
+.subtitle {
+    font-size: 13px;
+    line-height: 2;
+    color: #9b8879;
+    margin: 20px 0 30px;
+}
+
+.heart {
+    font-size: 35px;
+    margin-bottom: 20px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+}
+
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.3s;
+}
+
+.main-btn {
+    background: linear-gradient(135deg, #b99370, #8d684e);
+    color: white;
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 22px rgba(141,104,78,0.22);
+}
+
+.main-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(141,104,78,0.3);
+}
+
+.date-input {
+    display: block;
+    width: 100%;
+    padding: 17px;
+    border: 1px solid #e6d5c4;
+    border-radius: 12px;
+    outline: none;
+    background: #fffdf9;
+    color: #765b49;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.date-input:focus {
+    border-color: #b99370;
+    box-shadow: 0 0 0 3px rgba(185,147,112,0.12);
+}
+
+.error {
+    color: #b66c68;
+    font-size: 12px;
+    margin-top: 15px;
+    min-height: 20px;
+}
+
+.divider {
+    width: 70px;
+    height: 1px;
+    background: #d9bea2;
+    margin: 25px auto;
+}
+
+.romantic-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.9;
+    color: #9a7961;
+}
+
+.flower {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) rotate(450deg);
+        opacity: 0;
+    }
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -40px;
+    pointer-events: none;
+    animation: floatUp 7s linear forwards;
+    z-index: 3;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+.flower-garden {
+    display: none;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+    overflow: hidden;
+}
+
+.flower-garden.show {
+    display: block;
+}
+
+.garden-flower {
+    position: absolute;
+    font-size: clamp(25px, 5vw, 55px);
+    animation: bloom 1.5s ease backwards;
+    filter: drop-shadow(0 5px 5px rgba(100,70,40,0.12));
+}
+
+@keyframes bloom {
+    0% { transform: scale(0) rotate(-90deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.surprise-content {
+    display: none;
+    animation: fadeIn 2s ease;
+}
+
+.surprise-content.show {
+    display: block;
+}
+
+.ending {
+    font-family: 'Playfair Display', serif;
+    color: #8b6c54;
+    font-size: clamp(26px, 5vw, 39px);
+    margin: 25px 0;
+}
+
+.footer {
+    font-size: 10px;
+    color: #b5a292;
+    margin-top: 30px;
+    letter-spacing: 2px;
+}
+
+@media(max-width: 480px) {
+    .container {
+        padding: 40px 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1: WELCOME -->
+
+<section class="page active" id="page1">
+    <div class="container">
+        <div class="small-title">A little journey of love</div>
+
+        <div class="heart">🤍</div>
+
+        <h1>Welcome to<br><span>Our Forever</span></h1>
+
+        <div class="divider"></div>
+
+        <p class="subtitle">
+            My love, I've prepared something special for you.
+            But first, let's see if you remember
+            the most beautiful day of our lives.
+        </p>
+
+        <button class="main-btn" onclick="nextPage(2)">
+            Begin Our Story ♡
+        </button>
+
+        <div class="footer">MADE WITH LOVE • FOREVER YOURS</div>
+    </div>
+</section>
+
+
+<!-- PAGE 2: DATE QUESTION -->
+
+<section class="page" id="page2">
+    <div class="container">
+
+        <div class="small-title">A special little question</div>
+
+        <div class="heart">💍</div>
+
+        <h1>What's Our<br><span>Married Date?</span></h1>
+
+        <p class="subtitle">
+            Tell me the date when our forever journey officially began.
+            I hope you remember it, my love. 🤍
+        </p>
+
+        <input
+            type="date"
+            class="date-input"
+            id="marriedDate"
+        >
+
+        <button class="main-btn" onclick="checkDate()">
+            Unlock My Surprise ♡
+        </button>
+
+        <p class="error" id="errorMessage"></p>
+
+        <div class="footer">ONE DATE • ONE LOVE • FOREVER</div>
+    </div>
+</section>
+
+
+<!-- PAGE 3: SURPRISE INTRO -->
+
+<section class="page" id="page3">
+    <div class="container">
+
+        <div class="small-title">You remembered! ❤️</div>
+
+        <div class="heart">🌸</div>
+
+        <h1>You're My<br><span>Forever Love</span></h1>
+
+        <div class="divider"></div>
+
+        <p class="subtitle">
+            You got it right, sweetheart!
+            Now, I've kept a little world of flowers and love
+            especially for you.
+        </p>
+
+        <p class="romantic-text">
+            "Every day with you is a beautiful chapter
+            in my favourite love story."
+        </p>
+
+        <br>
+
+        <button class="main-btn" onclick="openSurprise()">
+            Open Your Surprise ♡
+        </button>
+
+        <div class="footer">A SURPRISE MADE JUST FOR YOU</div>
+    </div>
+</section>
+
+
+<!-- PAGE 4: GRAND SURPRISE -->
+
+<section class="page" id="page4">
+    <div class="flower-garden" id="flowerGarden"></div>
+
+    <div class="container" id="surpriseCard">
+
+        <div class="surprise-content" id="surpriseContent">
+
+            <div class="small-title">To My Beautiful Wife</div>
+
+            <div class="heart">🤍</div>
+
+            <h1>My Love,<br><span>My Everything</span></h1>
+
+            <div class="divider"></div>
+
+            <p class="romantic-text">
+                Just like these beautiful flowers,
+                my love for you will always bloom.
+            </p>
+
+            <div style="font-size:35px; margin:25px 0;">
+                🌼 🤍 🌹 🤍 🌼
+            </div>
+
+            <h2 class="ending">I Love You Forever!</h2>
+
+            <p class="subtitle">
+                Thank you for being my happiness,
+                my peace, and my favourite person.
+                No matter where life takes us,
+                I will always choose you.
+            </p>
+
+            <p style="font-size:25px; margin-top:20px;">
+                ❤️ ♾️ ❤️
+            </p>
+
+            <div class="footer">
+                OCTOBER 02, 2026 • OUR FOREVER BEGINS
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+
+function nextPage(pageNumber) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById('page' + pageNumber)
+        .classList.add('active');
+}
+
+function checkDate() {
+
+    const enteredDate = document.getElementById('marriedDate').value;
+    const error = document.getElementById('errorMessage');
+
+    if (!enteredDate) {
+        error.innerText = "Please enter our special date, sweetheart. 🤍";
+        return;
+    }
+
+    if (enteredDate === "2026-10-02") {
+        error.innerText = "";
+        nextPage(3);
+    } else {
+        error.innerText = "Oops! That's not our special date. Try again, my love! ❤️";
+    }
+}
+
+
+// Falling Frangipani and rose petals
+
+const petals = ["🌼", "🤍", "🌸", "🌹"];
+
+function createPetal() {
+
+    const flower = document.createElement("div");
+
+    flower.className = "flower";
+    flower.innerText = petals[Math.floor(Math.random() * petals.length)];
+
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.fontSize = (18 + Math.random() * 20) + "px";
+    flower.style.animationDuration = (5 + Math.random() * 7) + "s";
+
+    document.body.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 12000);
+}
+
+setInterval(createPetal, 800);
+
+
+// Floating hearts
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+    heart.innerText = ["🤍", "♡", "❤️"][Math.floor(Math.random() * 3)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(createHeart, 1300);
+
+
+// Grand surprise
+
+function openSurprise() {
+
+    nextPage(4);
+
+    const garden = document.getElementById("flowerGarden");
+    const content = document.getElementById("surpriseContent");
+
+    garden.classList.add("show");
+
+    // Create lots of flowers around the screen
+
+    const flowers = [
+        "🌼", "🌸", "🌹", "🤍", "💮", "🌼",
+        "🌹", "🌸", "🤍", "🌼", "🌹", "💮"
+    ];
+
+    for (let i = 0; i < 70; i++) {
+
+        const flower = document.createElement("div");
+
+        flower.className = "garden-flower";
+        flower.innerText = flowers[i % flowers.length];
+
+        flower.style.left = Math.random() * 95 + "%";
+        flower.style.top = Math.random() * 95 + "%";
+        flower.style.animationDelay = (Math.random() * 2) + "s";
+
+        garden.appendChild(flower);
+    }
+
+    setTimeout(() => {
+        content.classList.add("show");
+    }, 1000);
+
+    // Extra falling flowers
+
+    let count = 0;
+
+    const extraFlowers = setInterval(() => {
+        createPetal();
+        count++;
+
+        if (count >= 30) {
+            clearInterval(extraFlowers);
+        }
+    }, 250);
+}
+
+</script>
+
+</body>
+</html>
